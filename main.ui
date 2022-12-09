@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>250</height>
+    <height>400</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,13 +17,20 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Эспрессо</string>
+   <string>Капучино</string>
   </property>
   <layout class="QVBoxLayout" name="main_layout">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QTableWidget" name="table"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="editbtn">
+       <property name="text">
+        <string>Редактирование</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
