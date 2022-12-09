@@ -3,12 +3,14 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QTableWidgetItem
 from PyQt5.QtCore import Qt
 import sqlite3 as db
+from add_edit_ui import Ui_Form as EditForm
+from main_ui import Ui_Form as MainForm
 
 
-class EditWindow(QWidget):
+class EditWindow(QWidget, EditForm):
     def __init__(self):
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         self.btn.clicked.connect(self.push)
 
     def push(self):
@@ -20,7 +22,7 @@ class EditWindow(QWidget):
             v5 = self.in5.text()
             v6 = int(self.in6.text())
             v7 = int(self.in7.text())
-            con = db.connect('coffee.sqlite')
+            con = db.connect('data/coffee.sqlite')
             cur = con.cursor()
             if v1:
                 cur.execute("""UPDATE coffee SET variety = '{}', roasting = '{}', type = '{}', taste = '{}',
@@ -36,18 +38,15 @@ class EditWindow(QWidget):
             self.out.setText('Данные введены не правильно')
 
 
-class Example(QWidget):
+class Example(QWidget, MainForm):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        self.setupUi(self)
         self.start()
         self.editbtn.clicked.connect(self.push)
 
     def start(self):
-        con = db.connect('coffee.sqlite')
-        cur = con.cursor()
-        res = cur.execute("""SELECT * FROM coffee""").fetchall()
-        con = db.connect('coffee.sqlite')
+        con = db.connect('data/coffee.sqlite')
         cur = con.cursor()
         res = cur.execute("""SELECT * FROM coffee""").fetchall()
         self.draw(res)
